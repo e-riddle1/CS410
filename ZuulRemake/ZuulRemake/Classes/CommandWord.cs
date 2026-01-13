@@ -9,25 +9,32 @@ namespace ZuulRemake.Classes
 {
     internal class CommandWord
     {
+
         // A value for each command word along with its
         // corresponding user interface string.
-        GO("go"), QUIT("quit"), HELP("help"), UNKNOWN("?"), LOOK("look"), 
-    TAKE("take"),INVENTORY("inventory"), BACK("back"), DROP("drop"),
-    //EAT("eat"), 
-    //CHARGE("charge"), //FIRE("fire"), 
-    USE("use"), 
-    ATTACK("attack");
+        public static readonly CommandWord GO = new CommandWord("go");
+        public static readonly CommandWord HELP = new CommandWord("help");
+        public static readonly CommandWord UNKNOWN = new CommandWord("?");
+        public static readonly CommandWord LOOK = new CommandWord("look");
+        public static readonly CommandWord TAKE = new CommandWord("take");
+        public static readonly CommandWord INVENTORY = new CommandWord("inventory");
+        public static readonly CommandWord BACK = new CommandWord("back");
+        public static readonly CommandWord DROP = new CommandWord("drop");
+        public static readonly CommandWord USE = new CommandWord("use");
+        public static readonly CommandWord ATTACK = new CommandWord("attack");
+
+
+
+       
+      
 
 
 
         // The command string.
-        private String commandString;
+        private string commandString;
 
-        /**
-         * Initialise with the corresponding command string.
-         * @param commandString The command string.
-         */
-        CommandWord(String commandString)
+       
+        CommandWord(string commandString)
         {
             this.commandString = commandString;
         }
@@ -35,7 +42,7 @@ namespace ZuulRemake.Classes
         /**
          * @return The command word as a string.
          */
-        public String toString()
+        public string toString()
         {
             return commandString;
         }

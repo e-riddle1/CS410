@@ -23,9 +23,9 @@ namespace ZuulRemake.Classes
          */
         public Command getCommand()
         {
-            String inputLine;   // will hold the full input line
-            String word1 = null;
-            String word2 = null;
+            string inputLine;   // will hold the full input line
+            string word1 = null;
+            string word2 = null;
 
             Console.Write("> ");     // print prompt
 

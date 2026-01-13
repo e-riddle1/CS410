@@ -10,14 +10,14 @@ namespace ZuulRemake.Classes
     internal class BackPack
     {
         // instance variables - replace the example below with your own
-        private HashMap<String, Item> inventory;
+        private HashMap<string, Item> inventory;
 
         /**
          * Constructor for objects of class Inventory
          */
         public Backpack()
         {
-            inventory = new HashMap<String, Item>();
+            inventory = new HashMap<string, Item>();
         }
         /**
          * adds an item to the inventory
@@ -29,14 +29,14 @@ namespace ZuulRemake.Classes
         /**
          * removes an item from the hashmap.
          */
-        public void removeItem(String name)
+        public void removeItem(string name)
         {
             inventory.remove(name);
         }
         /**
          * pulls an item out of the inventory.
          */
-        public Item getItem(String itemGet)
+        public Item getItem(string itemGet)
         {
             return inventory.get(itemGet);
         }
@@ -45,8 +45,8 @@ namespace ZuulRemake.Classes
          */
         public boolean keyCheck()
         {
-            Set<String> keys = inventory.keySet();
-            for (String item : keys)
+            Set<string> keys = inventory.keySet();
+            for (string item : keys)
                 if (item.equals("key"))
                     return true;
             return false;
@@ -54,12 +54,12 @@ namespace ZuulRemake.Classes
         /**
          * displays all of the items in the inventory
          */
-        public String inventoryToString()
+        public string inventoryToString()
 
         {
-            String returnString = "";
-            Set<String> keys = inventory.keySet();
-            for (String item : keys)
+            string returnstring = "";
+            Set<string> keys = inventory.keySet();
+            for (string item : keys)
             {
                 returnString += " " + item;
             }

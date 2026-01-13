@@ -80,7 +80,7 @@ namespace ZuulRemake.Classes
         public string GetRoomItems()
         {
             string returnstring = "Items in this room:";
-            Set<string> keys = items.keySet();
+            HashSet<string> keys = items.keySet();
             if (keys.isEmpty())
             {
                 return "There are no items in this room!";
@@ -94,8 +94,8 @@ namespace ZuulRemake.Classes
         public string GetRoomMonsters()
         {
             string returnstring = "monsters in room:";
-            Set<string> keys = monsters.keySet();
-            if (keys.isEmpty())
+            HashSet<string> keys = monsters.keySet();
+            if (keys.Count = null)
             {
                 return "\nThere are no monsters in here in this room!\n";
             }
@@ -148,18 +148,18 @@ namespace ZuulRemake.Classes
          */
         public Item AddItem(string name, Item item)
         {
-            return items.put(name, item);
+            return items[(name, item)];
         }
         /**
          * adds monster to room
          */
         public Monster SetMonster(string name, Monster monster)
         {
-            return monsters.put(name, monster);
+            return monsters[name, monster];
         }
         public Monster GetMonster(string name)
         {
-            return monsters.get(name);
+            return monsters.name.get();
         }
         public Monster RemoveMonster(string name)
         {

@@ -10,7 +10,7 @@ namespace ZuulRemake.Classes
     internal class Command
     {
         private CommandWord commandWord;
-        private String secondWord;
+        private string secondWord;
 
         /**
          * Create a command object. First and second word must be supplied, but
@@ -19,7 +19,7 @@ namespace ZuulRemake.Classes
          *                  was not recognised.
          * @param secondWord The second word of the command.
          */
-        public Command(CommandWord commandWord, String secondWord)
+        public Command(CommandWord commandWord, string secondWord)
         {
             this.commandWord = commandWord;
             this.secondWord = secondWord;
@@ -39,7 +39,7 @@ namespace ZuulRemake.Classes
          * @return The second word of this command. Returns null if there was no
          * second word.
          */
-        public String getSecondWord()
+        public string getSecondWord()
         {
             return secondWord;
         }
@@ -47,7 +47,7 @@ namespace ZuulRemake.Classes
         /**
          * @return true if this command was not understood.
          */
-        public boolean isUnknown()
+        public bool isUnknown()
         {
             return (commandWord == CommandWord.UNKNOWN);
         }
@@ -55,7 +55,7 @@ namespace ZuulRemake.Classes
         /**
          * @return true if the command has a second word.
          */
-        public boolean hasSecondWord()
+        public bool hasSecondWord()
         {
             return (secondWord != null);
         }

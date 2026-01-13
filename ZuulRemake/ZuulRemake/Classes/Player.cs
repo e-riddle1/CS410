@@ -54,7 +54,7 @@ namespace ZuulRemake.Classes
         {
             if (CanCarry(item))
             {
-                currentRoom.removeItem(item.getName());
+                currentRoom.RemoveItem(item.name.get());
                 backpack.addItem(item);
                 return true;
             }

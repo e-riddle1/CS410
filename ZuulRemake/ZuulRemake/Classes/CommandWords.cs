@@ -11,7 +11,7 @@ namespace ZuulRemake.Classes
     {
         // A mapping between a command word and the CommandWord
         // associated with it.
-        private HashMap<String, CommandWord> validCommands;
+        private Dictionary<string, CommandWord> validCommands;
 
         /**
          * Constructor - initialise the command words.
@@ -34,7 +34,7 @@ namespace ZuulRemake.Classes
          * @return The CommandWord correspondng to commandWord, or UNKNOWN
          *         if it is not a valid command word.
          */
-        public CommandWord getCommandWord(String commandWord)
+        public CommandWord getCommandWord(string commandWord)
         {
             CommandWord command = validCommands.get(commandWord);
             if (command != null)
