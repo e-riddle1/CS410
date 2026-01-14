@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
+  "dgSpecHash": "ToIzzGjAEfE=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ewanchic\\Documents\\CS410\\ZuulRemake\\ZuulRemake\\ZuulRemake.csproj",
+=======
   "dgSpecHash": "RNWDiGf9dRI=",
   "success": true,
   "projectFilePath": "C:\\Users\\George\\Source\\Repos\\CS410\\ZuulRemake\\ZuulRemake\\ZuulRemake.csproj",
+>>>>>>> 409f20a268a868d582a9f66a2632d8012f555f48
   "expectedPackageFiles": [],
   "logs": []
 }

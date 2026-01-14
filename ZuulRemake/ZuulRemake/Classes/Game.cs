@@ -22,7 +22,7 @@ namespace ZuulRemake.Classes
             game.play();
         }
         /**
-         * Create the game and initialise its internal map.
+         * Create the game and initialise its internal map. :3
          */
         public Game()
         {
