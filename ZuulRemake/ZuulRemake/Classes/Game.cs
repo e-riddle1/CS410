@@ -21,7 +21,7 @@ namespace ZuulRemake.Classes
 
         }
         /**
-         * Create the game and initialise its internal map.
+         * Create the game and initialise its internal map. :3
          */
         public Game()
         {
