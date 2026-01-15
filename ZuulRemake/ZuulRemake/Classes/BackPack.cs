@@ -15,41 +15,38 @@ namespace ZuulRemake.Classes
         /**
          * Constructor for objects of class Inventory
          */
-        public Backpack()
+        public  BackPack()
         {
-            inventory = new HashMap<string, Item>();
+            inventory = new Dictionary<string, Item>();
         }
         /**
          * adds an item to the inventory
          */
-        public void addItem(Item itemAdded)
+        public void AddItem(Item itemAdded)
         {
-            inventory.put(itemAdded.getName(), itemAdded);
+            inventory.Add(itemAdded.Name, itemAdded);
         }
         /**
          * removes an item from the hashmap.
          */
-        public void removeItem(string name)
+        public void RemoveItem(string name)
         {
-            inventory.remove(name);
+            inventory.Remove(name);
         }
         /**
          * pulls an item out of the inventory.
          */
-        public Item getItem(string itemGet)
+        public Item GetItem(string itemGet)
         {
-            return inventory.get(itemGet);
+            return inventory.Add(string, itemGet);
         }
         /**
          * checks for the room key in the inventory
          */
-        public boolean keyCheck()
+        public bool keyCheck()
         {
-            Set<string> keys = inventory.keySet();
-            for (string item : keys)
-                if (item.equals("key"))
-                    return true;
-            return false;
+
+            return inventory.ContainsKey("key");
         }
         /**
          * displays all of the items in the inventory
@@ -57,13 +54,13 @@ namespace ZuulRemake.Classes
         public string inventoryToString()
 
         {
-            string returnstring = "";
-            Set<string> keys = inventory.keySet();
-            for (string item : keys)
+            string returnString = "";
+            HashSet<string> keys = inventory.Keys;
+            foreach (string item in keys)
             {
                 returnString += " " + item;
             }
-            if (returnString.equals(""))
+            if (returnString == (""))
             {
                 returnString = "backpack is empty";
             }
@@ -72,9 +69,9 @@ namespace ZuulRemake.Classes
         /**
          * adds an item to the inventory hashmap by name and item
          */
-        public void add(String name, Item item)
+        public void add(string name, Item item)
         {
-            inventory.put(name, item);
+            inventory.Add(name, item);
         }
         /**
          * iterates on the weight of the items in the inventory.

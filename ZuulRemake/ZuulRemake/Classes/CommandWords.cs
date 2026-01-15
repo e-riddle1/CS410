@@ -19,11 +19,11 @@ namespace ZuulRemake.Classes
         public CommandWords()
         {
             
-            for (CommandWord command : CommandWord.values())
+            for (CommandWord command in  CommandWord.values())
             {
                 if (command != CommandWord.UNKNOWN)
                 {
-                    validCommands.put(command.toString(), command);
+                    validCommands.Add(command.ToString(), command);
                 }
             }
         }
@@ -51,9 +51,9 @@ namespace ZuulRemake.Classes
          * Check whether a given String is a valid command word. 
          * @return true if it is, false if it isn't.
          */
-        public bool isCommand(String aString)
+        public bool isCommand(string aString)
         {
-            return validCommands.containsKey(aString);
+            return validCommands.ContainsKey(aString);
         }
 
         /**
@@ -61,11 +61,10 @@ namespace ZuulRemake.Classes
          */
         public void showAll()
         {
-            for (String command : validCommands.keySet())
+            foreach (string command in validCommands.KeySet())
             {
-                System.out.print(command + "  ");
-            }
-            System.out.println();
+                Console.Write(command + "  ");
+            
         }
     }
 }

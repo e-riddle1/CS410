@@ -55,7 +55,7 @@ namespace ZuulRemake.Classes
             if (CanCarry(item))
             {
                 currentRoom.RemoveItem(item.Name);
-                backpack.addItem(item);
+                backpack.AddItem(item);
                 return true;
             }
             else
@@ -140,7 +140,7 @@ namespace ZuulRemake.Classes
          */
         public string eatCookie(string name)
         {
-            Item cookie = backpack.getItem(name);
+            Item cookie = backpack.GetItem(name);
 
             string returnString = "";
             if (name == "cookie")
@@ -190,7 +190,7 @@ namespace ZuulRemake.Classes
          */
         public void RemoveFromBackpack(string itemRemove)
         {
-            backpack.removeItem(itemRemove);
+            backpack.RemoveItem(itemRemove);
         }
 
         /**
@@ -198,7 +198,7 @@ namespace ZuulRemake.Classes
          */
         public Item GetItemFromBackpack(string item)
         {
-            return backpack.getItem(item);
+            return backpack.GetItem(item);
         }
 
         /**

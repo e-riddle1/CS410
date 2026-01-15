@@ -52,6 +52,7 @@ namespace ZuulRemake.Classes
             entryway.SetExit("east", kitchen);
             entryway.SetExit("west", bedroom);
             entryway.SetExit("down", dungeon);
+
             dininghall.SetExit("east", ballroom);
             dininghall.SetExit("south", entryway);
             ballroom.SetExit("west", dininghall);
