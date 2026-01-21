@@ -7,23 +7,10 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZuulRemake.Classes
 {
-    internal class Command
+    internal class Command(CommandWord commandWord, string? secondWord)
     {
-        private CommandWord commandWord;
-        private string secondWord;
-
-        /**
-         * Create a command object. First and second word must be supplied, but
-         * either one (or both) can be null.
-         * @param firstWord The first word of the command. Null if the command
-         *                  was not recognised.
-         * @param secondWord The second word of the command.
-         */
-        public Command(CommandWord commandWord, string secondWord)
-        {
-            this.commandWord = commandWord;
-            this.secondWord = secondWord;
-        }
+        private readonly CommandWord commandWord = commandWord;
+        private readonly string? secondWord = secondWord;
 
         /**
          * Return the command word (the first word) of this command. If the
@@ -39,7 +26,7 @@ namespace ZuulRemake.Classes
          * @return The second word of this command. Returns null if there was no
          * second word.
          */
-        public string GetSecondWord()
+        public string? GetSecondWord()
         {
             return secondWord;
         }

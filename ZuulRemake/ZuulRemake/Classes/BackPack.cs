@@ -1,16 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZuulRemake.Classes
 {
     internal class BackPack
     {
         // instance variables - replace the example below with your own
-        private Dictionary<string, Item> inventory;
+        private readonly Dictionary<string, Item> inventory;
 
         /**
          * Constructor for objects of class Inventory
@@ -36,14 +32,15 @@ namespace ZuulRemake.Classes
         /**
          * pulls an item out of the inventory.
          */
-        public Item GetItem(string itemGet)
+        public Item? GetItem(string itemGet)
         {
-            return inventory.Add(string, itemGet);
+            inventory.TryGetValue(itemGet, out var item);
+            return item;
         }
         /**
          * checks for the room key in the inventory
          */
-        public bool keyCheck()
+        public bool KeyCheck()
         {
 
             return inventory.ContainsKey("key");
@@ -51,37 +48,30 @@ namespace ZuulRemake.Classes
         /**
          * displays all of the items in the inventory
          */
-        public string inventoryToString()
+        public string InventoryToString()
 
         {
-            string returnString = "";
-            HashSet<string> keys = inventory.Keys;
-            foreach (string item in keys)
-            {
-                returnString += " " + item;
-            }
-            if (returnString == (""))
-            {
-                returnString = "backpack is empty";
-            }
-            return returnString;
+            if (inventory.Count == 0)
+                return "backpack is empty";
+
+            return string.Join(", ", inventory.Keys);
         }
         /**
          * adds an item to the inventory hashmap by name and item
          */
-        public void add(string name, Item item)
+        public void Add(string name, Item item)
         {
             inventory.Add(name, item);
         }
         /**
          * iterates on the weight of the items in the inventory.
          */
-        public int getTotalWeight()
+        public int GetTotalWeight()
         {
             int weight = 0;
-            for (Iterator<Item> iter = inventory.values().iterator(); iter.hasNext();)
+            foreach (Item item in inventory.Values)
             {
-                weight += iter.next().getWeight();
+                weight += item.Weight;
             }
             return weight;
         }

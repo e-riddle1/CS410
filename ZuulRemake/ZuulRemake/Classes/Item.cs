@@ -6,24 +6,15 @@ using System.Threading.Tasks;
 
 namespace ZuulRemake.Classes
 {
-    internal class Item
+    internal class Item(string name, string description, int weight)
     {
         // instance variables - replace the example below with your own
-        public string Description { get; set; }
-        public int Weight { get; set; }
-        public string Name { get; set; }
+        public string Description { get; set; } = description;
+        public int Weight { get; set; } = weight;
+        public string Name { get; set; } = name;
 
-        /**
-         * Constructor for objects of class Item
-         */
-        public Item(string name, string description, int weight)
-        {
-            this.Name = name;
-            this.Description = description;
-            this.Weight = weight;
-        }
-
-        public string toString()
+        override
+            public string ToString()
         {
             return "name: " + Name + "\ndescription: " + Description + "\nweight: " + Weight;
         }

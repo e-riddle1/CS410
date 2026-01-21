@@ -7,29 +7,16 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZuulRemake.Classes
 {
-    internal class Player
+    internal class Player(string name)
     {
         // instance variables - replace the example below with your own
-        private string name;
+        private readonly string name = name;
         private Room currentRoom;
-        private BackPack backpack;
-        private int maximumWeight;
-        private Stack<Room> previousRoom = new();
-        private int turns = 0;
-        private int turnsLeft = 20;
-        private Room chargeRoom;
+        private readonly BackPack backpack = new BackPack();
+        private readonly int maximumWeight = 2;
+        private readonly Stack<Room> previousRoom = new Stack<Room>();
+        private Room? chargeRoom;
         private int hp = 100;
-        private Monster monster;
-        /**
-         * Constructor for objects of class Player
-         */
-        public Player(string name)
-        {
-            backpack = new BackPack();
-            this.name = name;
-            maximumWeight = 2;
-            previousRoom = new Stack<Room>();
-        }
 
         public string ExitsAvailable()
         {
@@ -69,7 +56,6 @@ namespace ZuulRemake.Classes
          */
         public string EnterRoom(Room nextRoom)
         {
-            turns++;
             string returnString = "";
             currentRoom = nextRoom;
 
@@ -113,7 +99,7 @@ namespace ZuulRemake.Classes
          * will take the item. if not the game will tell the player it is too
          * heavy.
          */
-        public string takeItem(string name)
+        public string TakeItem(string name)
         {
             string returnString = "";
             Item item = currentRoom.GetItem(name);
@@ -125,7 +111,7 @@ namespace ZuulRemake.Classes
             {
                 if (AddToBackPack(item))
                 {
-                    returnString += "took: " + item;
+                    returnString += "took: " + item.ToString();
                 }
                 else
                 {
@@ -136,38 +122,11 @@ namespace ZuulRemake.Classes
         }
 
         /**
-         * if the player is able to eat the item then the player will increase their maximum weight.
-         */
-        public string eatCookie(string name)
-        {
-            Item cookie = backpack.GetItem(name);
-
-            string returnString = "";
-            if (name == "cookie")
-            {
-
-                if (cookie == null)
-                {
-                    cookie = currentRoom.RemoveItem(name);
-                    returnString += "could not eat" + cookie;
-                }
-                else
-                {
-                    maximumWeight++;
-                    returnString += "you ate the cookie, you have become stronger";
-                    RemoveFromBackpack(name);
-                  
-                }
-            }
-            return returnString;
-        }
-
-        /**
          * checks to see if the item is in the backpack, if the backpack is
          * empty, it will tell you, otherwise it will remove the item from
          * the backpack and add it to the room.
          */
-        public string dropItem(string name)
+        public string DropItem(string name)
         {
             string returnString = "";
             Item itemRemove = GetItemFromBackpack(name);
@@ -219,7 +178,7 @@ namespace ZuulRemake.Classes
          * is no previous room it will tell you that you cant go back.
          * 
          */
-        public string goBack()
+        public string GoBack()
         {
             string returnString = "";
 
@@ -248,7 +207,7 @@ namespace ZuulRemake.Classes
         private bool CanCarry(Item item)
         {
             bool canCarry = true;
-            int totalWeight = backpack.getTotalWeight() + item.Weight;
+            int totalWeight = backpack.GetTotalWeight() + item.Weight;
             if (totalWeight > maximumWeight)
             {
                 canCarry = false;
@@ -313,8 +272,8 @@ namespace ZuulRemake.Classes
          */
         public string GetInventoryString()
         {
-            int totalWeight = backpack.getTotalWeight();
-            return backpack.inventoryToString() + "\nweight: " + totalWeight + "/" + maximumWeight + "\nHP:" + hp;
+            int totalWeight = backpack.GetTotalWeight();
+            return backpack.InventoryToString() + "\nweight: " + totalWeight + "/" + maximumWeight + "\nHP:" + hp;
         }
 
         /**

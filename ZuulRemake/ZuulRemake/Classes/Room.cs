@@ -7,27 +7,14 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ZuulRemake.Classes
 {
-    internal class Room
+    internal class Room(string description)
     {
-        private string description;
-        private Dictionary<string, Room> exits = new (StringComparer.OrdinalIgnoreCase);
+        private readonly string description = description;
+        private readonly Dictionary<string, Room> exits = [];
         private readonly Dictionary<string, bool> lockedExits = new(StringComparer.OrdinalIgnoreCase);
-        private Dictionary<string, Item> items = new (StringComparer.OrdinalIgnoreCase);
-        private Dictionary<string, Monster> monsters = new(StringComparer.OrdinalIgnoreCase);
-        private bool locked;
-        /**
-         * Create a room described "description". Initially, it has
-         * no exits. "description" is something like "a kitchen" or
-         * "an open court yard".
-         * @param description The room's description.
-         */
-        public Room(string description)
-        {
-            this.description = description;
-            exits = new Dictionary<string, Room>();
-            items = new Dictionary<string, Item>();
-            monsters = new Dictionary<string, Monster>();
-        }
+        private readonly Dictionary<string, Item> items = [];
+        private readonly Dictionary<string, Monster> monsters = [];
+
         override public string ToString()
         {
             return GetLongDescription() + "\n" + GetRoomItems() + "\n" +
@@ -62,7 +49,7 @@ namespace ZuulRemake.Classes
             return lockedExits.TryGetValue(direction, out var locked) && locked;
         }
 
-        public bool TryGetExit(string direction, out Room nextRoom)
+        public bool TryGetExit(string direction, out Room? nextRoom)
         {
             nextRoom = null;
 
@@ -102,8 +89,8 @@ namespace ZuulRemake.Classes
         }
         public string GetRoomMonsters()
         {
-            if (items.Count == 0) return "There are no Monsters in this room!";
-            return "Monsters in this room: " + string.Join(", ", items.Keys);
+            if (monsters.Count == 0) return "There are no Monsters in this room!";
+            return "Monsters in this room: " + string.Join(", ", monsters.Keys);
         }
         /**
          * @return The description of the room.

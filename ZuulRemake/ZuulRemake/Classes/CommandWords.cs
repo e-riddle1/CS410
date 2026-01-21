@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+
 
 namespace ZuulRemake.Classes
 {
@@ -11,22 +8,35 @@ namespace ZuulRemake.Classes
     {
         // A mapping between a command word and the CommandWord
         // associated with it.
-        private Dictionary<string, CommandWord> validCommands;
+        private readonly Dictionary<string, CommandWord> commands =
+            new(StringComparer.OrdinalIgnoreCase)
+            {
+                { "go", CommandWord.GO
+                },
+                { "help", CommandWord.HELP
+                },
+                { "look", CommandWord.LOOK
+                },
+                { "take", CommandWord.TAKE
+                },
+                { "inventory", CommandWord.INVENTORY
+                },
+                { "back", CommandWord.BACK
+                },
+                { "drop", CommandWord.DROP
+                },
+                { "use", CommandWord.USE
+                },
+                { "attack", CommandWord.ATTACK
+                },
+                { "quit", CommandWord.QUIT
+                }
+            };
 
         /**
          * Constructor - initialise the command words.
          */
-        public CommandWords()
-        {
-            
-            for (CommandWord command in  CommandWord.values())
-            {
-                if (command != CommandWord.UNKNOWN)
-                {
-                    validCommands.Add(command.ToString(), command);
-                }
-            }
-        }
+
 
         /**
          * Find the CommandWord associated with a command word.
@@ -34,37 +44,32 @@ namespace ZuulRemake.Classes
          * @return The CommandWord correspondng to commandWord, or UNKNOWN
          *         if it is not a valid command word.
          */
-        public CommandWord GetCommandWord(string commandWord)
+        public CommandWord GetCommandWord(string? word)
         {
-            CommandWord command = validCommands.get(commandWord);
-            if (command != null)
-            {
-                return command;
-            }
-            else
-            {
-                return CommandWord.UNKNOWN;
-            }
+            if (word == null) return CommandWord.UNKNOWN;
+            return commands.TryGetValue(word, out var cmd)
+                ? cmd : CommandWord.UNKNOWN;
         }
 
         /**
          * Check whether a given String is a valid command word. 
          * @return true if it is, false if it isn't.
          */
-        public bool isCommand(string aString)
+        public bool IsCommand(string aString)
         {
-            return validCommands.ContainsKey(aString);
+            return commands.ContainsKey(aString);
         }
 
         /**
          * Print all valid commands to System.out.
          */
-        public void showAll()
+        public void ShowAll()
         {
-            foreach (string command in validCommands.KeySet())
+            foreach (string command in commands.Keys)
             {
                 Console.Write(command + "  ");
-            
+
+            }
         }
     }
 }

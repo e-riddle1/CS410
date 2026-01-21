@@ -8,7 +8,7 @@ namespace ZuulRemake.Classes
 {
     internal class Parser
     {
-        private CommandWords commands;  // holds all valid command words
+        private readonly CommandWords commands;  // holds all valid command words
         
         /**
          * Create a parser to read from the terminal window.
@@ -23,9 +23,9 @@ namespace ZuulRemake.Classes
          */
         public Command GetCommand()
         {
-            string inputLine;   // will hold the full input line
-            string word1 = null;
-            string word2 = null;
+            string? inputLine;   // will hold the full input line
+            string? word1 = null;
+            string? word2 = null;
 
             Console.Write("> ");     // print prompt
 
@@ -46,9 +46,9 @@ namespace ZuulRemake.Classes
     /**
      * print out a list of valid command words.
      */
-    public void showCommands()
+    public void ShowCommands()
         {
-            commands.showAll();
+            commands.ShowAll();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
@@ -11,15 +12,15 @@ namespace ZuulRemake.Classes
 {
     internal class Game
     {
-        private Parser parser;
-        private Player player;
+        private readonly Parser parser;
+        private readonly Player player;
         private Room entryway, dininghall, ballroom, kitchen, bathroom, dungeon, bedroom, exit;
         private Item sword, lantern, armour, key, potion;
         private Monster dragon, ghoul;
         public static void Main(string[] args)
         {
             var game = new Game();
-            game.play();
+            game.Play();
         }
         /**
          * Create the game and initialise its internal map. :3
@@ -28,13 +29,14 @@ namespace ZuulRemake.Classes
         {
             parser = new Parser();
             player = new Player("Player1");
-            createRooms();
+            CreateRooms();
         }
 
         /**
          * Create all the rooms and link their exits together as well as monsters and items in the rooms.
          */
-        private Room createRooms()
+        
+        private  Room CreateRooms()
         {
 
             // create the rooms
@@ -67,9 +69,7 @@ namespace ZuulRemake.Classes
             lantern = new Item("lantern", "used to light the dark rooms of the castle", 1);
             armour = new Item("armour", "protect yourself from the mighty dragon", 1);
             potion = new Item("Potion", "use this to increase your health!", 1);
-            new Item("cookie", "eat this to become stronger", 0);
             key = new Item("key", "used to unlock the way out", 0);
-            new Item("spellbook", "enchant your sword to increase its damage", 0);
 
             //initialize items
             dininghall.SetItem("lantern", lantern);
@@ -92,10 +92,10 @@ namespace ZuulRemake.Classes
          *  Main play routine.  Loops until end of play.
          */
 
-        public void play()
+        public void Play()
         {
 
-            printWelcome();
+            PrintWelcome();
 
             // Enter the main command loop.  Here we repeatedly read commands and
             // execute them until the game is over.
@@ -104,10 +104,10 @@ namespace ZuulRemake.Classes
             while (!finished)
             {
                 Command command = parser.GetCommand();
-                finished = processCommand(command);
+                finished = ProcessCommand(command);
                 if (player.gameOver())
                 {
-                    printGameOver();
+                    PrintGameOver();
                     finished = true;
                 }
                 if (player.GetCurrentRoom() == exit)
@@ -122,7 +122,7 @@ namespace ZuulRemake.Classes
         /**
          * Print out the opening message for the player.
          */
-        private void printWelcome()
+        private void PrintWelcome()
         {
             Console.WriteLine();
             Console.WriteLine("Welcome to the World of Zuul!\n");
@@ -138,14 +138,14 @@ namespace ZuulRemake.Classes
         /**
          * printd a game over message when the player takes too many turns.
          */
-        private void printGameOver()
+        private void PrintGameOver()
         {
             Console.WriteLine("\nYou have died, please try again!");
         }
         /**
          * prints a victory message when the player leaves the castle.
          */
-        private void printWon()
+        private void PrintWon()
         {
             Console.WriteLine("\nYou won, you defeated the dragon and escaped the castle!");
         }
@@ -155,7 +155,7 @@ namespace ZuulRemake.Classes
          * @param command The command to be processed.
          * @return true If the command ends the game, false otherwise.
          */
-        private bool processCommand(Command command)
+        private bool ProcessCommand(Command command)
         {
             bool wantToQuit = false;
 
@@ -168,35 +168,35 @@ namespace ZuulRemake.Classes
                     break;
 
                 case CommandWord.HELP:
-                    printHelp();
+                    PrintHelp();
                     break;
 
                 case CommandWord.GO:
-                    goRoom(command);
+                    GoRoom(command);
                     break;
 
                 case CommandWord.QUIT:
-                    wantToQuit = quit(command);
+                    wantToQuit = Quit(command);
                     break;
 
                 case CommandWord.LOOK:
-                    look(command);
+                    Look(command);
                     break;
 
                 case CommandWord.TAKE:
-                    take(command);
+                    Take(command);
                     break;
 
                 case CommandWord.INVENTORY:
-                    inventory();
+                    Inventory();
                     break;
 
                 case CommandWord.BACK:
-                    goBack(command);
+                    GoBack(command);
                     break;
 
                 case CommandWord.DROP:
-                    drop(command);
+                    Drop(command);
                     break;
 
                 // case EAT:
@@ -212,11 +212,11 @@ namespace ZuulRemake.Classes
                 // break;
 
                 case CommandWord.USE:
-                    useItem(command);
+                    UseItem(command);
                     break;
 
                 case CommandWord.ATTACK:
-                    attack(command);
+                    Attack(command);
                     break;
             }
             return wantToQuit;
@@ -229,20 +229,20 @@ namespace ZuulRemake.Classes
          * Here we print some stupid, cryptic message and a list of the 
          * command words.
          */
-        private void printHelp()
+        private void PrintHelp()
         {
             Console.WriteLine("You are lost. You are alone. You wander");
             Console.WriteLine("around the castle.");
             Console.WriteLine();
             Console.WriteLine("Your command words are:");
-            parser.showCommands();
+            parser.ShowCommands();
         }
 
         /** 
          * Try to go in one direction. If there is an exit, enter
          * the new room, otherwise print an error message.
          */
-        private void goRoom(Command command)
+        private void GoRoom(Command command)
         {
             if (!command.HasSecondWord())
             {
@@ -257,7 +257,7 @@ namespace ZuulRemake.Classes
         /**
          * take player back to previous room they were in.
          */
-        private void goBack(Command command)
+        private void GoBack(Command command)
         {
             if (command.HasSecondWord())
             {
@@ -266,14 +266,14 @@ namespace ZuulRemake.Classes
             }
             else
             {
-                Console.WriteLine(player.goBack());
+                Console.WriteLine(player.GoBack());
             }
         }
 
         /**
          * looks in the room and gives description.
          */
-        private void look(Command command)
+        private void Look(Command command)
         {
             Console.WriteLine(player.GetRoomDescription());
         }
@@ -281,7 +281,7 @@ namespace ZuulRemake.Classes
         /**
          * prints the take item command from the player class
          */
-        private void take(Command command)
+        private void Take(Command command)
         {
             if (!command.HasSecondWord())
             {
@@ -289,14 +289,14 @@ namespace ZuulRemake.Classes
                 return;
             }
             string name = command.GetSecondWord();
-            Console.WriteLine(player.takeItem(name));
+            Console.WriteLine(player.TakeItem(name));
         }
 
         /**
          * uses the items in the inventory, if the player has a key they can unlock the door, if they have a lantern they will light the room in the kitchen
          * if they have a potion or armour they can increase their health.
          */
-        private void useItem(Command command)
+        private void UseItem(Command command)
         {
             if (!command.HasSecondWord())
             {
@@ -348,7 +348,7 @@ namespace ZuulRemake.Classes
         /**
          * adds the command to attack the monster
          */
-        private void attack(Command command)
+        private void Attack(Command command)
         {
             if (!command.HasSecondWord())
             {
@@ -358,21 +358,22 @@ namespace ZuulRemake.Classes
             string name = command.GetSecondWord();
 
             Console.WriteLine(player.attack(name));
-            if (!dragon.isAlive())
-            {
-                dungeon.SetItem("key", key);
-                Console.WriteLine("\nthe dragon has been slain! take the key and escape!");
-            }
+
             if (!ghoul.isAlive())
             {
                 bathroom.SetItem("potion", potion);
                 Console.WriteLine("\nyou killed the ghoul, take the potion to increase your health.\n");
+            } else if (!dragon.isAlive())
+            {
+                dungeon.SetItem("key", key);
+                Console.WriteLine("\nthe dragon has been slain! take the key and escape!");
             }
+            
         }
         /**
          * prints the drop item command from the player class
          */
-        private void drop(Command command)
+        private void Drop(Command command)
         {
             if (!command.HasSecondWord())
             {
@@ -382,7 +383,7 @@ namespace ZuulRemake.Classes
 
             string name = command.GetSecondWord();
 
-            Console.WriteLine(player.dropItem(name));
+            Console.WriteLine(player.DropItem(name));
         }
 
         /**
@@ -405,7 +406,7 @@ namespace ZuulRemake.Classes
          * displays the items in the inventory of the player class using the
          * tostring in the player class.
          */
-        private void inventory()
+        private void Inventory()
         {
             Console.WriteLine("you are currently holding: " + player.GetInventoryString());
 
@@ -415,30 +416,13 @@ namespace ZuulRemake.Classes
 
 
 
-        /** action to charge beamer.
-         * 
-         */
-
-        private void charge()
-        {
-            Console.WriteLine(player.BeamerCharge());
-        }
-
-        /** action to fire beamer.
-         * 
-         **/
-
-        private void fire()
-        {
-            Console.WriteLine(player.BeamerFire());
-        }
 
         /** 
          * "Quit" was entered. Check the rest of the command to see
          * whether we really quit the game.
          * @return true, if this command quits the game, false otherwise.
          */
-        private bool quit(Command command)
+        private bool Quit(Command command)
         {
             if (command.HasSecondWord())
             {
