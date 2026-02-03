@@ -16,7 +16,10 @@ namespace ZuulRemake.Classes
         private readonly Player player;
         private Room entryway, dininghall, ballroom, kitchen, bathroom, dungeon, bedroom, exit;
         private Item sword, lantern, armour, key, potion;
-        private Monster dragon, ghoul;
+
+        // ??
+        private List<Monster> monsters;
+
         public static void Main(string[] args)
         {
             var game = new Game();
@@ -93,11 +96,11 @@ namespace ZuulRemake.Classes
 
 
             //create the monsters
-            dragon = new Monster("dragon", 100);
-            ghoul = new Monster("ghoul", 50);
+            dragon = new Monster("Dragon", 100);
+            ghoul = new Monster("Ghoul", 50);
 
-            dungeon.SetMonster("dragon", dragon);
-            bathroom.SetMonster("ghoul", ghoul);
+            dungeon.SetMonster("Dragon", dragon);
+            bathroom.SetMonster("Ghoul", ghoul);
 
             return entryway;
         }
@@ -362,6 +365,7 @@ namespace ZuulRemake.Classes
             }
         }
 
+        // get monster in current room and get its info
 
         /**
          * adds the command to attack the monster
@@ -370,12 +374,14 @@ namespace ZuulRemake.Classes
         {
             if (!command.HasSecondWord())
             {
-                Console.WriteLine("what are you attacking?");
+                Console.WriteLine("What are you attacking?");
                 return;
             }
             string name = command.GetSecondWord();
 
-            Console.WriteLine(player.attack(name));
+            Monster monster = player.GetCurrentRoom().GetRoomMonsters()[1];
+            monster.TakeDamage(player.Level);
+            Console.WriteLine("You did " + player.Level + "damage to " + monster.Name + ". \n");
 
             
             

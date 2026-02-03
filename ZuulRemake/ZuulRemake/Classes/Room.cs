@@ -15,11 +15,13 @@ namespace ZuulRemake.Classes
         private readonly Dictionary<string, Item> items = [];
         private readonly Dictionary<string, Monster> monsters = [];
 
-        override public string ToString()
+        public override string ToString()
         {
-            return GetLongDescription() + "\n" + GetRoomItems() + "\n" +
-                GetRoomMonsters();
+            return GetLongDescription() + "\n" 
+                 + GetRoomItems() + "\n" 
+                 + GetRoomMonsters();
         }
+
         /**
          * Define the exits of this room.  Every direction either leads
          * to another room or is null (no exit there).
@@ -92,6 +94,17 @@ namespace ZuulRemake.Classes
             if (monsters.Count == 0) return "There are no Monsters in this room!";
             return "Monsters in this room: " + string.Join(", ", monsters.Keys);
         }
+
+        public Monster GetFirstMonster()
+        {
+            if (monsters.Count != 0)
+            {
+                return monsters.First();
+            }
+        }
+
+
+
         /**
          * @return The description of the room.
          */

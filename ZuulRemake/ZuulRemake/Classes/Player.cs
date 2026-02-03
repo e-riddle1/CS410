@@ -16,7 +16,7 @@ namespace ZuulRemake.Classes
         public int MaxWeight { get; set; } = 2;
         public int Level { get; set; } = 10;
 
-        private Room CurrentRoom { get; set; }
+        private Room? CurrentRoom { get; set; }
         private Room? chargeRoom { get; set; }
 
         private readonly BackPack backpack = new BackPack();
@@ -28,43 +28,11 @@ namespace ZuulRemake.Classes
             Name = name;
         }
 
-
-        public string ExitsAvailable()
-        {
-            string returnString = "";
-            returnString += CurrentRoom.GetExitString();
-            return returnString;
-        }
+        // ROOM NAVIGATION
 
         /**
-         * returns the current room that you are in.
-         */
-        public Room GetCurrentRoom()
-        {
-            return CurrentRoom;
-        }
-
-        /**
-         * takes item out of room and places it into the backpack as long as
-         * you can carry it.
-         */
-        public bool AddToBackPack(Item item)
-        {
-            if (item.Weight + CarryWeight <= MaxWeight)
-            {
-                CurrentRoom.RemoveItem(item.Name);
-                backpack.AddItem(item);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /**
-         * this returns the current room that you are in.
-         */
+        * this returns the current room that you are in.
+        */
         public string EnterRoom(Room nextRoom)
         {
             string returnString = "";
@@ -85,8 +53,55 @@ namespace ZuulRemake.Classes
             // Try to leave current room.
             previousRoom.Push(CurrentRoom);
             CurrentRoom = nextRoom;
-            return CurrentRoom.ToString();           
+            return CurrentRoom.ToString();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public string ExitsAvailable()
+        {
+            string returnString = "";
+            returnString += CurrentRoom.GetExitString();
+            return returnString;
+        }
+
+        /**
+         * takes item out of room and places it into the backpack as long as
+         * you can carry it.
+         */
+        public bool AddToBackPack(Item item)
+        {
+            if (item.Weight + CarryWeight <= MaxWeight)
+            {
+                CurrentRoom.RemoveItem(item.Name);
+                backpack.AddItem(item);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+       
 
         /**
          * checks player inventory for key
@@ -250,17 +265,6 @@ namespace ZuulRemake.Classes
         {
             Level += levels;
         }
-
-        /**
-         * Deals damage to a monster based on current level
-         */
-        public int DealAttack(Monster monster)
-        {            
-            return Level;
-        }
-
-
-        // simplified ^
         
         // Player level determines damage dealt to monster
         // All player does is deal damage
